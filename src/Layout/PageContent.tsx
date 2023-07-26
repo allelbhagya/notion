@@ -1,4 +1,4 @@
-import { HomeIcon } from "@heroicons/react/outline";
+import { HomeIcon, BriefcaseIcon } from "@heroicons/react/outline";
 import { useEffect, useRef } from "react";
 import ContentEditable from "react-contenteditable";
 import { useParams } from "react-router";
@@ -41,7 +41,7 @@ const HeaderSection = () => {
   return (
     <div>
       {/* cover */}
-      <div className="h-40 group relative bg-slate-800 w-full">
+      <div className="container group relative w-full">
         {/* icon */}
         <div className="absolute -bottom-5 bg-white p-1 rounded-md left-20">
           <HomeIcon className="w-16 h-16 text-gray-600" />
@@ -62,7 +62,7 @@ const HeaderSection = () => {
           onChange={handleChange} // handle innerHTML change
         />
         <label className="text-sm text-gray-500">
-          page data
+          Add description
         </label>
       </div>
     </div>

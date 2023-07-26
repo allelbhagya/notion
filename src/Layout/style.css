@@ -3,3 +3,11 @@
   display: block;
   color: #aaa;
 }
+.container {
+  /* Set the desired height for the container */
+  height: 200px;
+  /* Set other styles for the container as needed */
+  background-image: url('../../public/cover.webp');
+  background-size: cover;
+  background-position: center;
+}

@@ -11,6 +11,7 @@ import {
   ClipboardCopyIcon,
   MenuIcon
 } from "@heroicons/react/outline";
+import { TrashIcon, DownloadIcon, HomeIcon, StarIcon } from '@heroicons/react/solid'
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useAppContext } from "../hooks/useAppContext";
@@ -40,15 +41,22 @@ export default function SideBar({
         <div className="flex space-x-2 items-center">
           <EmojiHappyIcon className="w-4 h-4 text-gray-500" />
           <span className=""><b>{randomCompanyName}</b></span>
-
         </div>
         <div>
           <ChevronDoubleLeftIcon className="w-4 h-4 hidden  group-hover:block" />
         </div>
       </div>
       <SettingsSection />
-      <PagesSection />
-      <Another/>
+      <div className="flex-1 overflow-auto">
+        <PagesSection title="Favourites" />
+        <div className="my-4" /> {/* This adds space between sections */}
+        <PagesSection title="Private" />
+        <div className="my-4" /> {/* This adds space between sections */}
+        <EndSection />
+        
+      </div>
+      <div className="my-4" /> {/* This adds space between sections */}
+
     </div>
   );
 }
@@ -66,80 +74,60 @@ const SettingsSection = () => {
       </div>
       <div className="px-3 flex items-center py-1 space-x-2 hover:bg-gray-200 hover:cursor-pointer">
         <CogIcon className="w-4 h-4 text-gray-500" />
-
         <span>Settings & members</span>
       </div>
       <div className="px-3 flex items-center py-1 space-x-2 hover:bg-gray-200 hover:cursor-pointer">
         <PlusCircleIcon className="w-4 h-4 text-gray-500" />
-
         <span>New page</span>
       </div>
     </div>
   );
 };
 
-const PagesSection = () => {
+const EndSection = () => {
+  return (
+    <div className="flex flex-col text-gray-600">
+      <div className="px-3 flex items-center py-1 space-x-2 hover:bg-gray-200 hover:cursor-pointer">
+        <HomeIcon className="w-4 h-4 text-gray-500" />
+        <span>Create a teamspace</span>
+      </div>
+      <div className="px-3 flex items-center py-1 space-x-2 hover:bg-gray-200 hover:cursor-pointer">
+        <StarIcon className="w-4 h-4 text-gray-500" />
+        <span>Templates</span>
+      </div>
+      <div className="px-3 flex items-center py-1 space-x-2 hover:bg-gray-200 hover:cursor-pointer">
+        <DownloadIcon className="w-4 h-4 text-gray-500" />
+        <span>Import</span>
+      </div>
+      <div className="px-3 flex items-center py-1 space-x-2 hover:bg-gray-200 hover:cursor-pointer">
+        <TrashIcon className="w-4 h-4 text-gray-500" />
+        <span>Trash</span>
+      </div>
+    </div>
+  );
+};
+
+const PagesSection = ({ title }) => {
   const { pages } = useAppContext();
   return (
     <div className="flex-1  overflow-auto">
       <div className="p-3 flex items-center justify-between group text-gray-700">
-        <span className="text-xs text-gray-500">Favourites</span>
+        <span className="text-xs text-gray-500">{title}</span>
         <PlusIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" />
-        <MenuIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" />
-        
       </div>
       {pages.slice(0, 5).map((page, index) => (
-  <PageItem page={page} index={index} key={page._id} />
-))}
-
+        <PageItem page={page} index={index} key={page._id} />
+      ))}
     </div>
   );
 };
+
 interface PageItemProps {
   page: Page;
   index: number;
 }
+
 const PageItem = ({ page: { _id, name }, index }: PageItemProps) => {
-  return (
-    <NavLink
-      to={`/${_id}`}
-      activeClassName={"bg-gray-200"}
-      style={{ textDecoration: "none" }}
-      className={
-        "px-3 group flex items-center text-gray-700 justify-between py-1 hover:bg-gray-200 hover:cursor-pointer"
-      }
-    >
-      <div className="space-x-2 items-center flex">
-        <ChevronRightIcon className="w-4 h-4" />
-        <span className="capitalize">{name}</span>
-      </div>
-      <div className="hidden group-hover:flex items-center space-x-2">
-        <DotsHorizontalIcon className="w-4 h-4" />
-        <PlusIcon className="w-4 h-4" />
-      </div>
-    </NavLink>
-  );
-};
-const Another = () => {
-  const { pages } = useAppContext();
-  return (
-    <div className="flex-1  overflow-auto">
-      <div className="p-3 flex items-center justify-between group text-gray-700">
-        <span className="text-xs text-gray-500">Private</span>
-        <PlusIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" /> 
-      </div>
-      {pages.slice(0, 5).map((page, index) => (
-  <PageItem page={page} index={index} key={page._id} />
-))}
-
-    </div>
-  );
-};
-interface PageItemProps {
-  page: Page;
-  index: number;
-}
-const AnotherItem = ({ page: { _id, name }, index }: PageItemProps) => {
   return (
     <NavLink
       to={`/${_id}`}
