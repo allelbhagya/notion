@@ -1,4 +1,4 @@
-import { HomeIcon, BriefcaseIcon } from "@heroicons/react/outline";
+import { HomeIcon } from "@heroicons/react/outline";
 import { useEffect, useRef } from "react";
 import ContentEditable from "react-contenteditable";
 import { useParams } from "react-router";
@@ -61,6 +61,7 @@ const HeaderSection = () => {
           disabled={false} // use true to disable editing
           onChange={handleChange} // handle innerHTML change
         />
+                <div className="my-1" /> {/* This adds space between sections */}
         <label className="text-sm text-gray-500">
           Add description
         </label>

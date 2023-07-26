@@ -31,7 +31,7 @@ export default function SideBar({
   return (
     <div
       className={`flex  text-sm flex-shrink-0 flex-col h-full bg-gray-100 transition-all duration-300 shadow-sm ${
-        isSidebarOpen ? "w-96" : "hidden"
+        isSidebarOpen ? "w-80" : "hidden"
       }`}
     >
       <div
@@ -48,9 +48,9 @@ export default function SideBar({
       </div>
       <SettingsSection />
       <div className="flex-1 overflow-auto">
-        <PagesSection title="Favourites" />
+        <FavSection title="Favourites" />
         <div className="my-4" /> {/* This adds space between sections */}
-        <PagesSection title="Private" />
+        <PrivSection title="Private" />
         <div className="my-4" /> {/* This adds space between sections */}
         <EndSection />
         
@@ -107,7 +107,7 @@ const EndSection = () => {
   );
 };
 
-const PagesSection = ({ title }) => {
+const FavSection = ({ title }) => {
   const { pages } = useAppContext();
   return (
     <div className="flex-1  overflow-auto">
@@ -116,7 +116,7 @@ const PagesSection = ({ title }) => {
         <PlusIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" />
       </div>
       {pages.slice(0, 5).map((page, index) => (
-        <PageItem page={page} index={index} key={page._id} />
+        <FavItem page={page} index={index} key={page._id} />
       ))}
     </div>
   );
@@ -127,7 +127,48 @@ interface PageItemProps {
   index: number;
 }
 
-const PageItem = ({ page: { _id, name }, index }: PageItemProps) => {
+const FavItem = ({ page: { _id, name }, index }: PageItemProps) => {
+  return (
+    <NavLink
+      to={`/${_id}`}
+      activeClassName={"bg-gray-200"}
+      style={{ textDecoration: "none" }}
+      className={
+        "px-3 group flex items-center text-gray-700 justify-between py-1 hover:bg-gray-200 hover:cursor-pointer"
+      }
+    >
+      <div className="space-x-2 items-center flex">
+        <ChevronRightIcon className="w-4 h-4" />
+        <span className="capitalize">{name}</span>
+      </div>
+      <div className="hidden group-hover:flex items-center space-x-2">
+        <DotsHorizontalIcon className="w-4 h-4" />
+        <PlusIcon className="w-4 h-4" />
+      </div>
+    </NavLink>
+  );
+};
+const PrivSection = ({ title }) => {
+  const { pages } = useAppContext();
+  return (
+    <div className="flex-1  overflow-auto">
+      <div className="p-3 flex items-center justify-between group text-gray-700">
+        <span className="text-xs text-gray-500">{title}</span>
+        <PlusIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" />
+      </div>
+      {pages.slice(6,11).map((page, index) => (
+        <PrivItem page={page} index={index} key={page._id} />
+      ))}
+    </div>
+  );
+};
+
+interface PageItemProps {
+  page: Page;
+  index: number;
+}
+
+const PrivItem = ({ page: { _id, name }, index }: PageItemProps) => {
   return (
     <NavLink
       to={`/${_id}`}
