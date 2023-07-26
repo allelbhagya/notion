@@ -8,7 +8,8 @@ import {
   PlusIcon,
   SearchIcon,
   PlusCircleIcon,
-  ClipboardCopyIcon
+  ClipboardCopyIcon,
+  MenuIcon
 } from "@heroicons/react/outline";
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -84,6 +85,8 @@ const PagesSection = () => {
       <div className="p-3 flex items-center justify-between group text-gray-700">
         <span className="text-xs text-gray-500">Favourites</span>
         <PlusIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" />
+        <MenuIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" />
+        
       </div>
       {pages.slice(0, 5).map((page, index) => (
   <PageItem page={page} index={index} key={page._id} />
@@ -123,7 +126,7 @@ const Another = () => {
     <div className="flex-1  overflow-auto">
       <div className="p-3 flex items-center justify-between group text-gray-700">
         <span className="text-xs text-gray-500">Private</span>
-        <PlusIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" />
+        <PlusIcon className="w-4 h-4 hidden group-hover:block cursor-pointer" /> 
       </div>
       {pages.slice(0, 5).map((page, index) => (
   <PageItem page={page} index={index} key={page._id} />
