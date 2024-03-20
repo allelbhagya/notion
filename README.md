@@ -1,10 +1,5 @@
 # Notion Clone
 
-
-This is a Notion Clone project, based on the original repository https://github.com/amjadbouhouch/notion-clone . It aims to replicate some of the core functionalities of Notion, with additional features and improvements added.
-
-
-
 ### Demo
 https://bhagya-notion.vercel.app/
 
